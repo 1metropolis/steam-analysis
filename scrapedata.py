@@ -15,8 +15,8 @@ print("Download complete.")
 # the file is too large, needs to be split in order to stay below github's 100mb filesize limit
 # split the jsons to each contain 'n' objects.
 def json_splitter(filepath, objectcount):
-    
     print("Starting JSON Splitter.")
+    
     # unzip
     with zipfile.ZipFile(filepath, 'r') as z:
         
@@ -28,9 +28,10 @@ def json_splitter(filepath, objectcount):
                 print(f"Skipping {filename} because it isn't a JSON.")
                 continue
             
+            print(f"Opening and reading {filename}...")
+            
             # from stackoverflow: decode zip from binary in utf-8
             with z.open(filename) as f:
-                print(f"Opening and reading {filename}...")
                 data = f.read()
                 data_str = data.decode("utf-8")
                 d = json.loads(data_str)
